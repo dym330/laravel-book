@@ -26,6 +26,7 @@ Route::get('/sign_in', [SessionController::class, 'sign_in']);
 Route::post('/sign_in', [SessionController::class, 'login']);
 
 Route::resource('user', UserController::class);
+Route::resource('book', UserController::class);
 
 
 

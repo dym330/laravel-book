@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Book extends Model
 {
     use HasFactory;
+
     protected $guarded = array('id');
 
     public static $rules = array(
-        'name' => 'required',
-        'email' => 'email',
-        'password' => 'required'
+        'user_id' => 'required',
+        'title' => 'required',
+        'body' => 'required'
     );
 
-    public function Books() {
-        return $this->hasMany('App\Book');
+    public function user() {
+        return $this->belongsTo('App\User');
     }
 }
