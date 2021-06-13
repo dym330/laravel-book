@@ -37,4 +37,9 @@ class SessionController extends Controller
             return view('session.sign_in');
         }
     }
+
+    public function logout(Request $request) {
+        $request->session()->forget('id');
+        return redirect('/');
+    }
 }

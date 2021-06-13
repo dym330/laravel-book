@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+use function Psy\debug;
 
 class BookController extends Controller
 {
@@ -34,7 +38,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, Book::$rules);
+        $user_id = $request->session()->get('id');
+        $book = new Book;
+        $form = $request->all();
+        unset($form['_token']);
+        $form['user_id'] = $user_id;
+        $book->fill($form)->save();
+        return redirect('/');
     }
 
     /**
