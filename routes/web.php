@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TopController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TopController::class, 'index']);
+Route::get('/about', [TopController::class, 'about']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/sign_up', [SessionController::class, 'sign_up']);
+Route::post('/sign_up', [SessionController::class, 'create']);
 
-require __DIR__.'/auth.php';
+Route::get('/sign_in', [SessionController::class, 'sign_in']);
+Route::post('/sign_in', [SessionController::class, 'login']);
+
+Route::resource('user', UserController::class);
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+// require __DIR__.'/auth.php';
