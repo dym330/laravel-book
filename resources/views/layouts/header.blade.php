@@ -7,7 +7,7 @@
             @if (session('id'))
                 <li　style="list-style: none;"><a href="{{ route('user.show', ['user' => session('id')]) }}" style="">Home</a></li>
                 <li　style="list-style: none;"><a href="{{ route('user.index') }}" style="">Users</a></li>
-                <li　style="list-style: none;"><a href="/" style="">Books</a></li>
+                <li　style="list-style: none;"><a href="{{ route('book.index') }}" style="">Books</a></li>
                 <li　style="list-style: none;"><a href="{{ route('logout') }}" style="">logout</a></li>
             @else
                 <li　style="list-style: none;"><a href="{{ route('top') }}" style="">Home</a></li>

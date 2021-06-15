@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-
-use function Psy\debug;
 
 class BookController extends Controller
 {
@@ -15,9 +12,12 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user_id = $request->session()->get('id');
+        $user = User::find($user_id);
+        $books = Book::with('user')->get();
+        return view('book.index', ['user' => $user, 'books' => $books]);
     }
 
     /**
@@ -43,7 +43,7 @@ class BookController extends Controller
         $book = new Book;
         $form = $request->all();
         unset($form['_token']);
-        $form['user_id'] = $user_id;
+        $book->user_id = $user_id;
         $book->fill($form)->save();
         return redirect('/');
     }
@@ -56,7 +56,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        $book = Book::find($id);
+        $user = User::find($book->user_id);
+        return view('book.show', ['user' => $user, 'book' => $book]);
     }
 
     /**

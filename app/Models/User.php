@@ -17,6 +17,6 @@ class User extends Model
     );
 
     public function Books() {
-        return $this->hasMany('App\Book');
+        return $this->hasMany(Book::class);
     }
 }

@@ -12,12 +12,11 @@ class Book extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'user_id' => 'required',
         'title' => 'required',
         'body' => 'required'
     );
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }
