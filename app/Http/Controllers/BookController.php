@@ -45,7 +45,7 @@ class BookController extends Controller
         unset($form['_token']);
         $book->user_id = $user_id;
         $book->fill($form)->save();
-        return redirect('/');
+        return redirect(route('book.show', $book->id))->with('success', '本を登録しました');
     }
 
     /**
@@ -69,7 +69,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::find($id);
+        return view('book.edit', ['book' => $book]);
     }
 
     /**
@@ -81,7 +82,12 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, Book::$rules);
+        $book = Book::find($id);
+        $form = $request->all();
+
+        $book->fill($form)->save();
+        return redirect(route('book.show', $book->id))->with('success', '更新しました');
     }
 
     /**
@@ -92,6 +98,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+        return redirect(route('book.index'))->with('alert', '削除しました');
     }
 }

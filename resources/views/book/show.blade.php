@@ -28,11 +28,30 @@
             <td>名前</td>
             <td>タイトル</td>
             <td>本文</td>
+            @if ($book->user_id == session('id'))
+                <td></td>
+                <td></td>
+            @endif
         </tr>
         <tr>
-            <td>{{ $book->user->name }}</td>
+            <td>
+                <a href="{{ route('user.show', $book->user_id) }}">
+                    <img src="{{ asset('storage/profiles/'.$book->user->image) }}" alt="画像" width="50px">
+                    <br>{{ $book->user->name }}
+                </a>
+            </td>
             <td>{{ $book->title }}</td>
             <td>{{ $book->body }}</td>
+            @if ($book->user_id == session('id'))
+                <td><a href="{{ route('book.edit', ['book' => $book->id]) }}">Show</a></td>
+                <td>
+                    <form action="{{ route('book.destroy', $book->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="削除" onclick="return confirm('削除しますか？');">
+                    </form>
+                </td>
+            @endif
         </tr>
     </table>
 @endsection

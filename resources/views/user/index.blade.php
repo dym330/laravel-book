@@ -5,9 +5,17 @@
 
     <h2>Users</h2>
     <table>
-        <tr><th>user</th></tr>
+        <tr>
+            <th>image</th>
+            <th>name</th>
+            <th></th>
+        </tr>
         @foreach ($users as $userdata)
-            <tr><td>{{ $userdata->name }}</td></tr>
+            <tr>
+                <td><img src="{{ asset('storage/profiles/'.$userdata->image) }}" alt="画像" width="50px"></td>
+                <td>{{ $userdata->name }}</td>
+                <td><a href="{{ route('user.show', ['user' => $userdata->id]) }}">show</a></td>
+            </tr>
         @endforeach
     </table>
 @endsection
