@@ -61,7 +61,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
@@ -73,7 +74,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, User::$update_rules);
+        $user = User::find($id);
+        $form = $request->all();
+        unset($form['_token']);
+        $user->fill($form)->save();
+        return redirect(route('user.show', ['user' => $id]));
     }
 
     /**

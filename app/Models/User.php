@@ -16,6 +16,10 @@ class User extends Model
         'password' => 'required'
     );
 
+    public static $update_rules = array(
+        'name' => 'required',
+    );
+
     public function Books() {
         return $this->hasMany(Book::class);
     }

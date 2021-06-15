@@ -1,10 +1,7 @@
 @extends('layouts.common')
 
 @section('main')
-    <h2>User info</h2>
-    <table>
-        <th>name</th><td>{{ $user->name }}</td>
-    </table>
+    @include('share.side', ['user' => $user])
 
     <h2>Users</h2>
     <table>
