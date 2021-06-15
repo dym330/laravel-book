@@ -11,13 +11,15 @@ class User extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'name' => 'required',
-        'email' => 'email',
+        'name' => 'required|between:2,20',
+        'email' => 'email|required',
         'password' => 'required'
     );
 
     public static $update_rules = array(
-        'name' => 'required',
+        'name' => 'required|between:2,20',
+        'introduction' => 'max:50',
+        'image' => ['file', 'image', 'mimes:jpeg,png']
     );
 
     public function Books() {

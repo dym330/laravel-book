@@ -1,6 +1,12 @@
 <h2>User info</h2>
+<img src="{{ asset('storage/profiles/'.$user->image) }}" alt="プロフィール画像">
 <table>
-    <th>name</th><td>{{ $user->name }}</td>
+    <tr>
+        <th>name</th><td>{{ $user->name }}</td>
+    </tr>
+    <tr>
+        <th>introduction</th><td>{{ $user->introduction }}</td>
+    </tr>
 </table>
 <a href="{{ route('user.edit', ['user' => $user->id])}}">編集</a>
 

@@ -14,8 +14,8 @@ class AddImageAndIntroductionToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('introduction')->nullable();
-            $table->text('image')->nullable();
+            $table->string('introduction')->default('');
+            $table->string('image')->default('no_image.jpeg');
         });
     }
 

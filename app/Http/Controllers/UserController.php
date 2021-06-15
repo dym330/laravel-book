@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Error;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -50,7 +53,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('user.show', ['user' => $user]);
+        $books = Book::where('user_id', $user->id)->get();
+        return view('user.show', ['user' => $user, 'books' => $books]);
     }
 
     /**
@@ -77,9 +81,31 @@ class UserController extends Controller
         $this->validate($request, User::$update_rules);
         $user = User::find($id);
         $form = $request->all();
+
+        $profileImage = $request->file('image');
+        if ($profileImage != null) {
+            $form['image'] = $this->saveProfileImage($profileImage, $id);
+        }
         unset($form['_token']);
+        unset($form['_method']);
         $user->fill($form)->save();
+
         return redirect(route('user.show', ['user' => $id]));
+    }
+
+    private function saveProfileImage($image, $id) {
+        // get instance
+        $img = \Image::make($image);
+        // resize
+        $img->fit(100, 100, function($constraint){
+            $constraint->upsize();
+        });
+        // save
+        $file_name = 'profile_'.$id.'.'.$image->getClientOriginalExtension();
+        $save_path = 'public/profiles/'.$file_name;
+        Storage::put($save_path, (string) $img->encode());
+        // return file name
+        return $file_name;
     }
 
     /**
