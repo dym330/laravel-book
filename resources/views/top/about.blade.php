@@ -1,6 +1,9 @@
 @extends('layouts.common')
 
 @section('main')
-    <h1>welcome to Bookers !!</h1>
-    <p>CopyRight Infratop.inc</p>
+    <div class="flex justify-center">
+        <div>
+            <h1 class="text-3xl font-semibold">welcome to Bookers !!</h1>
+        </div>
+    </div>
 @endsection
