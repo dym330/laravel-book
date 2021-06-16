@@ -1,7 +1,7 @@
 @extends('layouts.common')
 
 @section('main')
-    <h1>welcome to Bookers !!</h1>
+    <h1 class="text-3xl font-semibold">welcome to Bookers !!</h1>
     <p>
         In Bookers,<br />
         you can share and exchange your opinions , inpressions , and emotions<br />

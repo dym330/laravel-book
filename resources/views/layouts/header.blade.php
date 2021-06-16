@@ -1,20 +1,22 @@
-<header style="background-color: lightsteelblue; height: 50px; width: 100%; display: flex; justify-content: space-between; align-items: center;">
-    <div id="logo">
-        <a href="{{ route('top') }}" style="float: left;">Bookers</a>
+<header class="text-gray-50 bg-gray-700 h-10">
+    <div class="container mx-auto flex justify-between items-center h-10">
+        <div id="logo">
+            <a href="{{ route('top') }}" class="text-2xl font-semibold">Bookers</a>
+        </div>
+        <nav>
+            <ul>
+                @if (session('id'))
+                    <li class="list-none inline-block ml-3"><a href="{{ route('user.show', ['user' => session('id')]) }}">Home</a></li>
+                    <li class="list-none inline-block ml-3"><a href="{{ route('user.index') }}">Users</a></li>
+                    <li class="list-none inline-block ml-3"><a href="{{ route('book.index') }}">Books</a></li>
+                    <li class="list-none inline-block ml-3"><a href="{{ route('logout') }}">logout</a></li>
+                @else
+                    <li class="list-none inline-block ml-3"><a href="{{ route('top') }}">Home</a></li>
+                    <li class="list-none inline-block ml-3"><a href="{{ route('about') }}">About</a></li>
+                    <li class="list-none inline-block ml-3"><a href="{{ route('sign_up') }}">sign up</a></li>
+                    <li class="list-none inline-block ml-3"><a href="{{ route('sign_in') }}">login</a></li>
+                @endif
+            </ul>
+        </nav>
     </div>
-    <nav>
-        <ul>
-            @if (session('id'))
-                <li　style="list-style: none;"><a href="{{ route('user.show', ['user' => session('id')]) }}" style="">Home</a></li>
-                <li　style="list-style: none;"><a href="{{ route('user.index') }}" style="">Users</a></li>
-                <li　style="list-style: none;"><a href="{{ route('book.index') }}" style="">Books</a></li>
-                <li　style="list-style: none;"><a href="{{ route('logout') }}" style="">logout</a></li>
-            @else
-                <li　style="list-style: none;"><a href="{{ route('top') }}" style="">Home</a></li>
-                <li　style="list-style: none;"><a href="{{ route('about') }}" style="">About</a></li>
-                <li　style="list-style: none;"><a href="{{ route('sign_up') }}" style="">sign up</a></li>
-                <li　style="list-style: none;"><a href="{{ route('sign_in') }}" style="">login</a></li>
-            @endif
-        </ul>
-    </nav>
 </header>
