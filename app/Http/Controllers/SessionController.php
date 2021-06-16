@@ -32,9 +32,9 @@ class SessionController extends Controller
         if ($user && $user->password == $request->password) {
             $request->session()->put('id', $user->id);
             session()->flash('flash_message', 'ログインに成功しました');
-            return redirect(route('user.show', ['user' => $user->id]));
+            return redirect(route('user.show', ['user' => $user->id]))->with('success', 'ログインしました');
         } else {
-            return view('session.sign_in');
+            return redirect(route('sign_in'))->with('alert', 'メールかパスワードが違います');
         }
     }
 

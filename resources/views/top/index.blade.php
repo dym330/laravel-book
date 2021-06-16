@@ -3,7 +3,7 @@
 @section('main')
     <div class="flex justify-center">
         <div>
-            <h1 class="text-3xl font-semibold">welcome to Bookers !!</h1>
+            <h1 class="text-3xl font-semibold mt-3">welcome to Bookers !!</h1>
             <p>
                 In <span class="font-bold">Bookers</span>,<br />
                 you can share and exchange your opinions , inpressions , and emotions<br />
