@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\LoginStateCheckForSessionPage;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TopController::class, 'index'])->name('top');
 Route::get('/about', [TopController::class, 'about'])->name('about');
 
-Route::get('/sign_up', [SessionController::class, 'sign_up'])->name('sign_up');
-Route::post('/sign_up', [SessionController::class, 'create'])->name('create');
+Route::middleware([LoginStateCheckForSessionPage::class])->group(function () {
+    Route::get('/sign_up', [SessionController::class, 'sign_up'])->name('sign_up');
+    Route::post('/sign_up', [SessionController::class, 'create'])->name('create');
 
-Route::get('/sign_in', [SessionController::class, 'sign_in'])->name('sign_in');
-Route::post('/sign_in', [SessionController::class, 'login'])->name('login');
+    Route::get('/sign_in', [SessionController::class, 'sign_in'])->name('sign_in');
+    Route::post('/sign_in', [SessionController::class, 'login'])->name('login');
+});
 
 Route::get('logout', [SessionController::class, 'logout'])->name('logout');
 

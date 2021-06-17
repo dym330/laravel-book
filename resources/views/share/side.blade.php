@@ -8,10 +8,13 @@
         <th class="px-4 py-2">introduction</th><td class="px-4 py-2">{{ $user->introduction }}</td>
     </tr>
 </table>
-<a href="{{ route('user.edit', ['user' => $user->id])}}"
+@if (session('id') == $user->id)
+    <a href="{{ route('user.edit', ['user' => $user->id])}}"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 w-3/5 rounded block text-center">
     編集
-</a>
+    </a>
+@endif
+
 
 <h2 class="text-3xl font-semibold mt-5 mb-3">Book新規登録</h2>
 <form action="/book" method="POST">
