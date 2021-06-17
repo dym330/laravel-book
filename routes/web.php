@@ -29,7 +29,8 @@ Route::post('/sign_in', [SessionController::class, 'login'])->name('login');
 
 Route::get('logout', [SessionController::class, 'logout'])->name('logout');
 
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->only((['index', 'show']));
+Route::resource('user', UserController::class)->only(['edit', 'update'])->middleware('user.edit.check');
 Route::resource('book', BookController::class);
 
 
